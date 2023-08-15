@@ -1,12 +1,12 @@
-import carbon_number
+import carbon_name
 
 
 def test_all():
     for i in range(1, 1005):
         print(
-            carbon_number.colored_num(i),
-            carbon_number.carbon_name(i, colored=True) +
-            carbon_number.green(carbon_number.suffix(0))
+            carbon_name.colored_num(i),
+            carbon_name.carbon_name(i, colored=True) +
+            carbon_name.green(carbon_name.suffix(0))
         )
 
 def test_one():
@@ -19,10 +19,10 @@ def test_one():
             break
         return num
     r = input_num()
-    s = carbon_number.carbon_name(r, colored=True)
-    print(carbon_number.colored_num(r))
+    s = carbon_name.carbon_name(r, colored=True)
+    print(carbon_name.colored_num(r))
     for i in range(0, 4):
-        print(s + carbon_number.green(carbon_number.suffix(i)))
+        print(s + carbon_name.green(carbon_name.suffix(i)))
 
 
 if __name__ == "__main__":
@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     print(
         "the name of alkane with 11 carbons is",
-        carbon_number.carbon_name(11) + carbon_number.suffix("alkane")
+        carbon_name.carbon_name(11) + carbon_name.suffix("alkane")
     )
 
     test_one()

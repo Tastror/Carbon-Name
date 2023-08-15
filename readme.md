@@ -7,11 +7,11 @@ a python library convert carbon number (organic chemistry) into its English name
 example
 
 ```python
-import carbon_number
+import carbon_name
 
 print(
     "the name of alkane with 11 carbons is",
-    carbon_number.carbon_name(11) + carbon_number.suffix("alkane")
+    carbon_name.carbon_name(11) + carbon_name.suffix("alkane")
 )
 ```
 

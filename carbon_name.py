@@ -25,10 +25,15 @@ _name_list = [
 _connect_suffix = "a"
 
 _suffix_list = [
-    "ane",
-    "ylene",
-    "yne",
-    "yl"
+    "yl",  # 基
+    "ane",  # 烷
+    "ene",  # 烯
+    "yne",  # 炔
+    "anol",  # 醇
+    "anal",  # 醛
+    "anone",  # 酮
+    "anoic acid",  # 羧酸
+    "anoate",  # 酯
 ]
 
 
@@ -85,7 +90,7 @@ def _get_ten_hundred_etc_str(ten_hundred_etc_num: int, num_of_right_zeros: int, 
 
 # get the name of the given carbon number
 def carbon_name(carbon_num: int, colored: bool = False) -> str:
-    if carbon_num <= 0:
+    if type(carbon_num) is not int or carbon_num <= 0:
         return ""
     if carbon_num <= 9:
         one_str = _get_only_one_str(carbon_num)
@@ -110,22 +115,40 @@ def carbon_name(carbon_num: int, colored: bool = False) -> str:
         if colored:
             return blue(one_str) + red(ten_str) + purple(hundred_num)
         return one_str + ten_str + hundred_num
-    return str(carbon_num) + "-carbon X"
+    return str(carbon_num) + "-carbon-X"
 
 
-def suffix(type_or_num) -> str:
+def suffix(type_or_num, colored: bool = False) -> str:
+    return_str = ""
     if type(type_or_num) is int:
-        return _suffix_list[type_or_num]
+        if type_or_num < 0 or type_or_num >= len(_suffix_list):
+            return ""
+        return_str = _suffix_list[type_or_num]
     elif type(type_or_num) is str:
-        if type_or_num == "alkane":
-            return _suffix_list[0]
-        elif type_or_num == "alkene":
-            return _suffix_list[1]
-        elif type_or_num == "alkyne":
-            return _suffix_list[2]
+        if type_or_num == "alkyl":  # 基
+            return_str = _suffix_list[0]
+        elif type_or_num == "alkane":  # 烷
+            return_str = _suffix_list[1]
+        elif type_or_num == "alkene":  # 烯
+            return_str = _suffix_list[2]
+        elif type_or_num == "alkyne":  # 炔
+            return_str = _suffix_list[3]
+        elif type_or_num == "alcohol":  # 醇
+            return_str = _suffix_list[4]
+        elif type_or_num == "aldehyde":  # 醛
+            return_str = _suffix_list[5]
+        elif type_or_num == "ketones":  # 酮
+            return_str = _suffix_list[6]
+        elif type_or_num == "acids":  # (羧)酸
+            return_str = _suffix_list[7]
+        elif type_or_num == "ester":  # 酯
+            return_str = _suffix_list[8]
         else:
-            return _suffix_list[3]
-    return ""
+            return_str = ""
+    else:
+        return_str = ""
+    if colored: return green(return_str)
+    return return_str
 
 
 def colored_num(num: int) -> str:

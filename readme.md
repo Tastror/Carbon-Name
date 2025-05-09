@@ -23,6 +23,6 @@ the name of alkane with 11 carbons is undecane
 
 try to run test.py!
 
-![test.py output](https://s2.loli.net/2023/08/15/tgJEL2TsmaSXWeq.png)
+![test.py output](https://s2.loli.net/2025/05/09/s6ZLWjiDXUHvGro.png)
 
 support range: 1~999

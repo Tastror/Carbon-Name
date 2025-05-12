@@ -2,25 +2,26 @@ _name_list = [
 
     # name_list[x][0] uses for 1 ~ 9
 
-    # name_list[x][1] use as the ones place's prefixes when the *tens* changed, order is <any>x, 1x, 2x, 3x, ...
-    #   default for len(name_list[x][1]) > 0 is name_list[x][1][-1]
+    # name_list[x][1] use as the ones place's prefixes when the *tens* changed, order is <any>x, 1x, 2x, ...
+    #   default for len(name_list[x][1]) > 0 is name_list[x][1][0]
     #   default for len(name_list[x][1]) == 0 is name_list[x][0] + connect_suffix
 
     # name_list[x][2] use as the tens, hundreds, thousands, etc. places' prefixes, order is x0, x00, x000, ...
-    #   default for len(name_list[x][1]) > 0 is name_list[x][1][-1] + name_list[0][2][num_of_right_zeros - 1]
+    #   default for len(name_list[x][1]) > 0 is name_list[x][1][0] + name_list[0][2][num_of_right_zeros - 1]
     #   default for len(name_list[x][1]) == 0 is name_list[x][0] + connect_suffix + name_list[0][2][num_of_right_zeros - 1]
 
     # connect_suffix ("a") used when
     #   (1) len(name_list[x][1]) == 0, or
     #   (2) connecting tens, hundreds, thousands, etc.
 
-    # prefix    prefix-change-before-tens           suffix
-    # single    all     10      20      30          10      100     1000
-    ("",       ["",     "",     "i",    ""      ], ["cont", "ct",   "li"    ],),  # 0
-    ("meth",   ["hen",  "un",   "heni", "hen"   ], ["dec",  "hect", "kili"  ],),  # 1
-    ("eth",    ["do"    ],                         ["cos",  "dict", "dili"  ],),  # 2 (di- only use in 200, 2000, etc., not in xx2)
-    ("prop",   ["tri"   ],                         ["triacont"],), # 3
-    ("but",    ["tetra" ],                         [],),  # 4
+    # prefix    prefix-change-before-tens       suffix
+    # single    all     10      20              10      100     1000
+    #                           two "icos" put here... (easy to add)
+    ("",       ["",     "",     "i",    ],     ["cont", "ct",   "li"    ],),  # 0
+    ("meth",   ["hen",  "un",   "heni", ],     ["dec",  "hect", "kili"  ],),  # 1
+    ("eth",    ["do"    ],                     ["cos",  "dict", "dili"  ],),  # 2 (di- only use in 200, 2000, etc., not in xx2)
+    ("prop",   ["tri"   ],                     ["triacont"],), # 3
+    ("but",    ["tetra" ],                     [],),  # 4
     ("pent",   [], []),  # 5
     ("hex",    [], []),  # 6
     ("hept",   [], []),  # 7
@@ -69,7 +70,7 @@ def _get_one_str(one_num: int, ten_num: int) -> str:
     assert(0 <= ten_num <= 9)
     if len(_name_list[one_num][1]) <= ten_num:
         if len(_name_list[one_num][1]) != 0:
-            one_str = _name_list[one_num][1][-1]
+            one_str = _name_list[one_num][1][0]
         else:
             one_str = _name_list[one_num][0] + _connect_suffix
     else:
@@ -86,7 +87,7 @@ def _get_ten_hundred_etc_str(ten_hundred_etc_num: int, num_of_right_zeros: int, 
         return ""
     if len(_name_list[ten_hundred_etc_num][2]) < num_of_right_zeros:
         if len(_name_list[ten_hundred_etc_num][1]) != 0:
-            ten_hundred_etc_str = _name_list[ten_hundred_etc_num][1][-1] + _name_list[0][2][num_of_right_zeros - 1]
+            ten_hundred_etc_str = _name_list[ten_hundred_etc_num][1][0] + _name_list[0][2][num_of_right_zeros - 1]
         else:
             ten_hundred_etc_str = _name_list[ten_hundred_etc_num][0] + _connect_suffix + _name_list[0][2][num_of_right_zeros - 1]
     else:

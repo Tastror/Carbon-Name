@@ -25,4 +25,4 @@ try to run test.py!
 
 ![test.py output](https://s2.loli.net/2025/05/09/s6ZLWjiDXUHvGro.png)
 
-support range: 1~999
+support range: 1~9999
